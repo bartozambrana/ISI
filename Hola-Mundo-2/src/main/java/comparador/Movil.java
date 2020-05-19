@@ -2,27 +2,26 @@ package comparador;
 
 
 
-import org.joda.time.LocalDate;
-
-import java.util.ArrayList;
+//import org.joda.time.LocalDate;
+//
+//import java.util.ArrayList;
 
 public class Movil{
 	
 	private String marca;
 	private Float precio;
 	private String links;
-	private String urlImagenes;
+	private String urlImagen;
 	private FuentesDatos proveedor;
-	private LocalDate fecha;
+//	private String caracteristicas;
 	
-	public Movil(String marca, Float precio,String urls, String urlImagenes,
-				 LocalDate fecha, FuentesDatos proveedor) {
+	public Movil(String marca, Float precio,String urls, String urlImagen, FuentesDatos proveedor, String caracteristicas) {
 		this.marca = marca;
 		this.precio = precio;
 		this.links = urls;
-		this.urlImagenes = urlImagenes;
-		this.fecha = fecha;
+		this.urlImagen = urlImagen;
 		this.proveedor = proveedor;
+//		this.caracteristicas = caracteristicas;
 	}
 	
 
@@ -30,7 +29,11 @@ public class Movil{
 	public String getMarca() {
 		return marca;
 	}
-
+	
+//	public String getCaracteristicas() {
+//		return caracteristicas;
+//	}
+//
 
 
 	public void setMarca(String marca) {
@@ -63,28 +66,27 @@ public class Movil{
 
 
 
-	public String getUrlImagenes() {
-		return urlImagenes;
+	public String getUrlImagen() {
+		return urlImagen;
 	}
 
 
 
-	public void setUrlImagenes(String urlImagenes) {
-		this.urlImagenes = urlImagenes;
+	public void setUrlImagenes(String urlImagen) {
+		this.urlImagen = urlImagen;
 	}
 
 	
 
-	public LocalDate getFecha() {
-		return fecha;
-	}
+//	public LocalDate getFecha() {
+//		return fecha;
+//	}
 
 
 
 	@Override
 	public String toString() {
-		return "Movil [marca=" + marca + "\n, modelo="  + "\n listaprecio=" + precio + "\n links="
-				+ links + "\n URL imagenes= " + urlImagenes + "]";
+		return "marca=" + marca + " &precio=" + precio + " &link=" + links + " &imagen= " + urlImagen + " #" ;
 	}
 
 	

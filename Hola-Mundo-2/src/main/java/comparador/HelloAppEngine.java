@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class HelloAppEngine extends HttpServlet {
 
-  @Override
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+@Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws IOException {
 

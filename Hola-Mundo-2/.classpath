@@ -25,5 +25,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/home/mipc/eclipse-workspace/jsoup-1.13.1.jar"/>
+	<classpathentry kind="lib" path="/home/mipc/eclipse-workspace/Hola-Mundo-2/src/main/webapp/WEB-INF/lib/jsoup-1.13.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
