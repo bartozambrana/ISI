@@ -93,8 +93,8 @@ public class Scraping {
 	public  void buscarCorteIngles() throws IOException{
 		//Url para la búsqueda en Amazon;
 		
-		String url = "http://www.elcorteingles.es/electronica/moviles-y-smartphones/search/?level=6&s=" + reemplazaEspaciosPorMas(producto);
-	
+		String url = "http://www.hipercor.es/electronica/telefonia/moviles-y-smartphones-libres/search/?level=6&s=" + reemplazaEspaciosPhoneHouse(producto);
+		System.out.println(url);
 			
 			//Obtenemos el documento HTML de la web.
 
@@ -104,7 +104,7 @@ public class Scraping {
 				String comprobacion = documento.select("h1.truncate.wrap").text();
 				System.out.println(comprobacion);
 				
-				if(comprobacion != null && comprobacion.equals("Móviles y Smartphones")) {
+				if(comprobacion.equals("Comprar Móviles y Smartphones libres online")) {
 					// Buscamos las entradas 
 					Elements entradas = documento.select("div.product-preview");
 					System.out.println("El número de elemtnos es " + entradas.size());
@@ -118,7 +118,7 @@ public class Scraping {
 					            precio = precio.replace(".","");
 					            precio = precio.replace(",", ".");
 					            float precioReal = Float.parseFloat(precio);
-					            String link = "https://www.elcorteingles.es" + elem.getElementsByAttributeValue("data-event", "product_click").attr("href");
+					            String link = "https://www.hipercor.es" + elem.getElementsByAttributeValue("data-event", "product_click").attr("href");
 					            String urlImagen = "https:" + elem.getElementsByClass("c12").attr("src");
 					            
 					            
