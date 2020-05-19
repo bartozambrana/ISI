@@ -99,40 +99,42 @@ public class Scraping {
 			//Obtenemos el documento HTML de la web.
 			Document documento = this.getHtmlDocument(url);
 //			Document documentoCaracteristicas = null;
-			String comprobacion = documento.select("h1.truncate.wrap").text();
-			System.out.println(comprobacion);
-			
-			if(comprobacion.equals("Móviles y Smartphones")) {
-				// Buscamos las entradas 
-				Elements entradas = documento.select("div.product-preview");
-				System.out.println("El número de elemtnos es " + entradas.size());
-				 for (Element elem : entradas) {
-			            String titulo = elem.getElementsByClass("c12").attr("title");
-			            String precio = elem.getElementsByClass("current").text();
-			            System.out.println("El precio es: " + precio);
-			            if(!precio.equals("€")) {
-			            	int indice = precio.indexOf("€");
-				            precio = precio.substring(0,indice);
-				            precio = precio.replace(".","");
-				            precio = precio.replace(",", ".");
-				            float precioReal = Float.parseFloat(precio);
-				            String link = "https://www.elcorteingles.es" + elem.getElementsByAttributeValue("data-event", "product_click").attr("href");
-				            String urlImagen = "https:" + elem.getElementsByClass("c12").attr("src");
-				            
-				            
-				            //Obtenemos las características: 
-				            //documentoCaracteristicas = getHtmlDocument(link);
-				            //Elements entradas2 = documentoCaracteristicas.getElementsByAttributeValue("id", "features");
-				            //String datos = entradas2.html();
-				            String datos ="";
-				            Movil movil = new Movil(titulo,precioReal,link,urlImagen,FuentesDatos.CORTEINGLES,datos);
-				            listaMoviles.add(movil);
-				            
-			            }
-			                    			
-			     }            
+			if(documento != null) {
+				String comprobacion = documento.select("h1.truncate.wrap").text();
+				System.out.println(comprobacion);
+				
+				if(comprobacion != null && comprobacion.equals("Móviles y Smartphones")) {
+					// Buscamos las entradas 
+					Elements entradas = documento.select("div.product-preview");
+					System.out.println("El número de elemtnos es " + entradas.size());
+					 for (Element elem : entradas) {
+				            String titulo = elem.getElementsByClass("c12").attr("title");
+				            String precio = elem.getElementsByClass("current").text();
+				            System.out.println("El precio es: " + precio);
+				            if(!precio.equals("€")) {
+				            	int indice = precio.indexOf("€");
+					            precio = precio.substring(0,indice);
+					            precio = precio.replace(".","");
+					            precio = precio.replace(",", ".");
+					            float precioReal = Float.parseFloat(precio);
+					            String link = "https://www.elcorteingles.es" + elem.getElementsByAttributeValue("data-event", "product_click").attr("href");
+					            String urlImagen = "https:" + elem.getElementsByClass("c12").attr("src");
+					            
+					            
+					            //Obtenemos las características: 
+					            //documentoCaracteristicas = getHtmlDocument(link);
+					            //Elements entradas2 = documentoCaracteristicas.getElementsByAttributeValue("id", "features");
+					            //String datos = entradas2.html();
+					            String datos ="";
+					            Movil movil = new Movil(titulo,precioReal,link,urlImagen,FuentesDatos.CORTEINGLES,datos);
+					            listaMoviles.add(movil);
+					            
+				            }
+				                    			
+				     }            
+				}
 			}
-			
+	
 	}
 	
 	
