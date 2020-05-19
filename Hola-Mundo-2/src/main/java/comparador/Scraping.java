@@ -97,7 +97,8 @@ public class Scraping {
 	
 			
 			//Obtenemos el documento HTML de la web.
-			Document documento = this.getHtmlDocument(url);
+
+			Document documento = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(100000).get();
 //			Document documentoCaracteristicas = null;
 			if(documento != null) {
 				String comprobacion = documento.select("h1.truncate.wrap").text();
