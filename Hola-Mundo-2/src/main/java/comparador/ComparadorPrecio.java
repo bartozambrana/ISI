@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
@@ -60,7 +62,7 @@ public class ComparadorPrecio {
 		
 
 		if(! cache.containsKey(producto)) {
-			scraping.buscarCorteIngles();
+			scraping.buscarMaxMovil();
 			scraping.buscarPccomponentes();
 			//Cogemos la lista de los móviles.
 			listaMoviles = scraping.getListaMoviles();
