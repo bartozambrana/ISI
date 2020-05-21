@@ -38,7 +38,8 @@
 	
 		<form action="./busqueda.jsp" method="get" class="center">
 		    <div class="input-group">
-		      <input type="text" class="form-control" id="barra" placeholder="Busqueda" name="movil" id="Busqueda" required>
+		      <input type="text" class="form-control" id="barra" placeholder="Marca" name="marca" id="Busqueda" required>
+		      <input type="text" class="form-control" id="barra" placeholder="Modelo" name="modelo" id="modeloBusqueda" required>
 		      <div class="input-group-btn">
 		        <input type="submit"  class="btn btn-danger" id="enviar" value="Enviar">
 		      </div>

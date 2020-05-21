@@ -23,7 +23,7 @@ public class JavaSample {
         String TOKEN = "1a8a0f78ca189c64d69a9d245a45f7125700a49494a039be";
         FonoApiService api = new FonoApiFactory().create();
 
-         Call<List<DeviceEntity>> response = api.getDevice(TOKEN, "a50", "samsung", 0); //
+         Call<List<DeviceEntity>> response = api.getDevice(TOKEN, "note 8", "xiaomi", 0); //
         
         //Response<List<DeviceEntity>> response;
         //response =  api.getLatest(TOKEN, "motorola", 30).execute();       
