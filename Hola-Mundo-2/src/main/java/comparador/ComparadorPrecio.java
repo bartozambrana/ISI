@@ -66,7 +66,7 @@ public class ComparadorPrecio {
 			scraping.buscarPccomponentes();
 			//Cogemos la lista de los móviles.
 			listaMoviles = scraping.getListaMoviles();
-			//Collections.sort(listaMoviles, compararPorPrecioMenor);
+			Collections.sort(listaMoviles, compararPorPrecioMenor);
 			cache.put(producto, listaMoviles.toString());
 		}else {
 			procesarCadena(cache.get(producto).toString());
