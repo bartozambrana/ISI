@@ -51,13 +51,11 @@
 			String marca = request.getParameter("marca");
 			String modelo = request.getParameter("modelo");
 			
-			String movil = marca + " " + modelo;
-			
-			
-			ComparadorPrecio comparador = new ComparadorPrecio(movil);
+			ComparadorPrecio comparador = new ComparadorPrecio(marca, modelo);
 			
 			comparador.busqueda();
 			ArrayList<Movil> moviles = comparador.getListaMoviles();
+			ArrayList<String> caracteristicas = comparador.getCaracteristicas();
 			for(int i = 0; i< moviles.size(); i++){
 				out.println(
 						" <div class='container-fluid bg-grey'> " +
@@ -75,8 +73,12 @@
 			  				"</div>" +
 						"</div>"
 						);
-				System.out.println(moviles.get(i).getUrlImagen());
-			} 
+			}
+			
+			out.println("<p> Estas son las características generales para la búsqueda realizada: </p> ");
+			for (int i = 0; i < caracteristicas.size(); i++){
+				out.println(caracteristicas.get(i).toString());
+			}
 			
 			
 				

@@ -1,35 +1,32 @@
 package comparador;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aafanasev.fonoapi.DeviceEntity;
 import com.aafanasev.fonoapi.retrofit.FonoApiFactory;
 import com.aafanasev.fonoapi.retrofit.FonoApiService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import retrofit2.Call;
 
-public class JavaSample { 
+public class ExtraccionFonoApi {
+	
+	private String TOKEN;
+	private String marca;
+	private String modelo;
 
-    // TODO: https://fonoapi.freshpixl.com/token/generate
-    private static final String TOKEN = "1a8a0f78ca189c64d69a9d245a45f7125700a49494a039be";
-
-    public static void main(String[] args) throws IOException {
-        showcaseRetrofit();
-    }
-    
-    @SuppressWarnings("empty-statement")
-    private static void showcaseRetrofit() throws IOException {
-        String TOKEN = "1a8a0f78ca189c64d69a9d245a45f7125700a49494a039be";
+	public  ExtraccionFonoApi() {
+		TOKEN = "1a8a0f78ca189c64d69a9d245a45f7125700a49494a039be";
+	}
+	
+	public ArrayList<String> showcaseRetrofit() throws IOException {
         FonoApiService api = new FonoApiFactory().create();
-
-         Call<List<DeviceEntity>> response = api.getDevice(TOKEN, "note 8", "xiaomi", 0); 
         
-        //Response<List<DeviceEntity>> response;
-        //response =  api.getLatest(TOKEN, "motorola", 30).execute();       
+        Call<List<DeviceEntity>> response = api.getDevice(TOKEN, modelo, marca, 0);   
                  
         String nombre; 
-        ArrayList<String> caracteristicas;
+        ArrayList<String> caracteristicas = null;
         
         List<DeviceEntity> listaSacada = null; 
         
@@ -40,9 +37,6 @@ public class JavaSample {
             {
                 // sacar nombre
                 nombre = listaSacada.get(i).getDeviceName();
-
-                // sacar características 
-                //caracteristicas = listaSacada.get(i).getCamera();
                 
                 // sacar características
                 caracteristicas = sacarCaracteristicasFonoapi(listaSacada.get(i));
@@ -56,12 +50,11 @@ public class JavaSample {
             System.out.println("NO SE HA ENCONTRADO NADA: " + e.getMessage());
             
         }; 
-                
+       
+       return caracteristicas;
     }
-    
-    
-    
-    public static ArrayList<String> sacarCaracteristicasFonoapi( DeviceEntity item ){
+       
+    private ArrayList<String> sacarCaracteristicasFonoapi( DeviceEntity item ){
         ArrayList<String> res = new ArrayList<>(); 
         
         if(item.getAlarm()!= null){
@@ -107,5 +100,12 @@ public class JavaSample {
         
         return res; 
     }
+    
+    public void setMarca(String marca) {
+		this.marca = marca.trim();
+	}
 
+	public void setModelo(String modelo) {
+		this.modelo = modelo.trim();
+	}
 }
