@@ -81,6 +81,8 @@
 				for (int i = 0; i < caracteristicas.size(); i++){
 					out.println(caracteristicas.get(i).toString());
 				}
+			}else{
+				out.println("<p> No hemos encontrado características para tu búsqueda </p> ");
 			}
 			
 			

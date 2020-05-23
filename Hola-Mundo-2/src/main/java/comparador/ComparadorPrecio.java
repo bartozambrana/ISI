@@ -73,6 +73,8 @@ public class ComparadorPrecio {
 			cache.put(producto, listaMoviles.toString());
 		}else {
 			procesarCadena(cache.get(producto).toString());
+			//Búsqueda en la api
+			caracteristicas = api.showcaseRetrofit();
 			
 		}
 		
