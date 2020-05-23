@@ -75,10 +75,14 @@
 						);
 			}
 			
-			out.println("<p> Estas son las características generales para la búsqueda realizada: </p> ");
-			for (int i = 0; i < caracteristicas.size(); i++){
-				out.println(caracteristicas.get(i).toString());
+			
+			if(caracteristicas != null){
+				out.println("<p> Estas son las características generales para la búsqueda realizada: </p> ");
+				for (int i = 0; i < caracteristicas.size(); i++){
+					out.println(caracteristicas.get(i).toString());
+				}
 			}
+			
 			
 			
 				
