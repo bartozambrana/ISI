@@ -54,8 +54,21 @@
 			ComparadorPrecio comparador = new ComparadorPrecio(marca, modelo);
 			
 			comparador.busqueda();
-			ArrayList<Movil> moviles = comparador.getListaMoviles();
 			ArrayList<String> caracteristicas = comparador.getCaracteristicas();
+			if(caracteristicas != null){
+				out.println("<div class='container-fluid bg-grey'><ul> ");
+				out.println("<h2 align='center'><strong> Estas son las características generales para la búsqueda realizada: </strong></h2><br> ");
+				for (int i = 0; i < caracteristicas.size(); i++){
+					out.println("<li>" +  caracteristicas.get(i).toString() + "</li>" );
+					
+				}
+				out.println("</ul></div>");
+			}else{
+				out.println("<p align='center'> No hemos encontrado características para tu búsqueda </p> ");
+			}
+			
+			ArrayList<Movil> moviles = comparador.getListaMoviles();
+			
 			for(int i = 0; i< moviles.size(); i++){
 				out.println(
 						" <div class='container-fluid bg-grey'> " +
@@ -75,19 +88,7 @@
 						);
 			}
 			
-			
-			if(caracteristicas != null){
-				out.println("<p> Estas son las características generales para la búsqueda realizada: </p> ");
-				for (int i = 0; i < caracteristicas.size(); i++){
-					out.println(caracteristicas.get(i).toString());
-				}
-			}else{
-				out.println("<p> No hemos encontrado características para tu búsqueda </p> ");
-			}
-			
-			
-			
-				
+	
 		%>
 		 
 	</main>
