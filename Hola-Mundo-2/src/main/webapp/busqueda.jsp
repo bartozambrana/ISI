@@ -24,7 +24,7 @@
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#contact">CONTACT</a></li>
+		        <li><a href="mailto:alonsobueno13@correo.ugr.es?subject:proyectoIsi">CONTACTO</a></li>
 		      </ul>
 		    </div>
 		  </div>
@@ -64,28 +64,32 @@
 				}
 				out.println("</ul></div>");
 			}else{
-				out.println("<p align='center'> No hemos encontrado características para tu búsqueda </p> ");
+				out.println("<p align='center'> No hemos encontrado características para su búsqueda </p> ");
 			}
 			
 			ArrayList<Movil> moviles = comparador.getListaMoviles();
 			
-			for(int i = 0; i< moviles.size(); i++){
-				out.println(
-						" <div class='container-fluid bg-grey'> " +
-					 		"<div class='row'>" +
-			    			   " <div class='col-sm-4 '> " + 
-			     					 "<img class='thumbnail' src='" + moviles.get(i).getUrlImagen() + "'> " + 
-			    			    " </div>" +
-			   					"<div class='col-sm-8'> " +
-			      					"<h2><strong>" + moviles.get(i).getMarca() + "</strong></h2><br>" +
-			      					"<ul>" + 
-			      						"<li>" + moviles.get(i).getPrecio() + "€</li>" +
-			      						"<li>" + "<a href='"+ moviles.get(i).getLinks() +"' > Pincha aquí para vistar la página web </a>" + "</li>" +
-			      					"</ul>"+
-			    				"</div>"+
-			  				"</div>" +
-						"</div>"
-						);
+			if(moviles != null && moviles.size() != 0){
+				for(int i = 0; i< moviles.size(); i++){
+					out.println(
+							" <div class='container-fluid bg-grey'> " +
+						 		"<div class='row'>" +
+				    			   " <div class='col-sm-4 '> " + 
+				     					 "<img class='thumbnail' src='" + moviles.get(i).getUrlImagen() + "'> " + 
+				    			    " </div>" +
+				   					"<div class='col-sm-8'> " +
+				      					"<h2><strong>" + moviles.get(i).getMarca() + "</strong></h2><br>" +
+				      					"<ul>" + 
+				      						"<li>" + moviles.get(i).getPrecio() + "€</li>" +
+				      						"<li>" + "<a href='"+ moviles.get(i).getLinks() +"' class='enlacePagina' > Pinche aquí para vistar la página web </a>" + "</li>" +
+				      					"</ul>"+
+				    				"</div>"+
+				  				"</div>" +
+							"</div>"
+							);
+				}
+			}else{
+				out.println("<p align='center'> No hemos encontrado móviles para su búsqueda </p> ");
 			}
 			
 	

@@ -23,7 +23,7 @@
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#contact">CONTACT</a></li>
+		        <li><a href="mailto:alonsobueno13@correo.ugr.es?subject:proyectoIsi">CONTACTO</a></li>
 		      </ul>
 		    </div>
 		  </div>

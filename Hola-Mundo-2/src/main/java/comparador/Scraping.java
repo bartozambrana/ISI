@@ -45,105 +45,10 @@ public class Scraping {
 		return producto.replace(" ", "%20");
 	}
 	
-//	public void buscarPhoneHouse() throws IOException {
-//		
-//		// URL de búsqueda final
-//		String urlFinal = "";
-//		
-//		// URL de Phone House para la búsqueda de items
-//		String urlPhoneHouse = "https://www.phonehouse.es/buscar.html?buscar-texto=";
-//
-//		
-//		// Unimos toda la URL para la búsqueda
-//		urlFinal = urlPhoneHouse + reemplazaEspaciosPhoneHouse(producto) + "&subcategoria=Smartphones";
-//
-//		// Realiza conexion y comprueba status OK = 200
-//		if(getStatusConnectionCode(urlFinal) == 200){
-//
-//			// Obtenemos el documento HTML de la pagina solicitada
-//			Document doc = getHtmlDocument(urlFinal);
-//
-//			// Buscamos las entradas 
-//			Elements entradas = doc.select("div.row");
-//			System.out.println("Número de móviles PhoneHouse:  " +  entradas.size());
-//			
-//		    // Recorrer entradas
-//	        for (Element elem : entradas) {
-//	            String titulo = elem.getElementsByClass("marca-item").text();
-//	            System.out.println("Este es el titulo: " + titulo);
-//	            String precio =  elem.getElementsByClass("precios-libre").text();
-//	            System.out.println("Este es el precio: " + precio);
-//	            if(precio.indexOf("€") >= 0) {
-//	            	int indice = precio.indexOf("€");
-//		            precio = precio.substring(0,indice);
-//	            }
-//	            precio = precio.replace(",", ".");
-//	            float precioReal = Float.parseFloat(precio);
-//	            String link = elem.getElementsByClass("item-listado-mosaico").attr("href");
-//	            String urlImagen = elem.getElementsByClass("imagen-item").attr("href");
-//	            Movil p = new Movil(titulo,precioReal,link,urlImagen,LocalDate.now(),FuentesDatos.PHONE_HOUSE);;
-//				listaMoviles.add(p);                			
-//	        }
-//
-//		} else {
-//			System.out.println("Conexion rechazada");
-//		}
-//	}
-//	
-//	public  void buscarCorteIngles() throws IOException{
-//		//Url para la búsqueda en Amazon;
-//		
-//		//String url = "http://www.elcorteingles.es/electronica/moviles-y-smartphones/search/?level=6&s=" + reemplazaEspaciosPorMas(producto);
-//		String url = "https://www.maxmovil.com/es/moviles-libres/comprar-smartphones-libres.html#/dffullscreen/query=" + this.reemplazaEspaciosPhoneHouse(producto) 
-//		  + "&filter%5Bcategories%5D%5B0%5D=Smartphone&query_name=match_and";
-//			
-//			//Obtenemos el documento HTML de la web.
-//		Document documento = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8").get();
-//
-//			String comprobacion = documento.select("h1.truncate.wrap").text();
-//			System.out.println(comprobacion);
-//			
-//			if(comprobacion != null && comprobacion.equals("Móviles y Smartphones")) {
-//				// Buscamos las entradas 
-//				Elements entradas = documento.select("div.product-preview");
-//				System.out.println("El número de elemtnos es " + entradas.size());
-//				 for (Element elem : entradas) {
-//			            String titulo = elem.getElementsByClass("c12").attr("title");
-//			            String precio = elem.getElementsByClass("current").text();
-//			            System.out.println("El precio es: " + precio);
-//			            if(!precio.equals("€")) {
-//			            	int indice = precio.indexOf("€");
-//				            precio = precio.substring(0,indice);
-//				            precio = precio.replace(".","");
-//				            precio = precio.replace(",", ".");
-//				            float precioReal = Float.parseFloat(precio);
-//				            String link = "https://www.elcorteingles.es" + elem.getElementsByAttributeValue("data-event", "product_click").attr("href");
-//				            String urlImagen = "https:" + elem.getElementsByClass("c12").attr("src");
-//				            
-//				            
-//				            //Obtenemos las características: 
-//				            //documentoCaracteristicas = getHtmlDocument(link);
-//				            //Elements entradas2 = documentoCaracteristicas.getElementsByAttributeValue("id", "features");
-//				            //String datos = entradas2.html();
-//				            String datos ="";
-//				            Movil movil = new Movil(titulo,precioReal,link,urlImagen,FuentesDatos.CORTEINGLES,datos);
-//				            listaMoviles.add(movil);
-//				            
-//			            }
-//			                    			
-//			     }            
-//			}
-//		
-//	
-//	}
-//	
-//	
 	public void buscarPccomponentes () throws Exception
     {
 		
 		String url = "https://www.pccomponentes.com/buscar/?query="+ reemplazaEspaciosPorMas(producto) + "#pg-0&or-search&fm-1116";
-        
-		//String url = "https://www.pccomponentes.com/buscar/?query=xiami+note+4#pg-0&or-search&fm-1116";
 		
 		// Componer la URL y crear el objeto Document para hacer el web-scraping 
 
@@ -184,7 +89,6 @@ public class Scraping {
                     // procesar y formatear el precio                
                     precio_util = limpiarYConvertirPrecio(precio_actual); 
                    
-
                     // sacar la URL
                     urlMovil = "https://www.pccomponentes.com" + aux.attr("href");
                     
@@ -195,10 +99,7 @@ public class Scraping {
                     
                     //Creación del objeto móvil.
                    
-                    //Document doc2 = (Document) Jsoup.connect(urlMovil).get(); 
-                    //String datos = doc2.getElementById("ficha-producto-caracteristicas").html();   // 
-                    String datos = "";
-                    Movil movil = new Movil(nombre, precio_util, urlMovil, urlImagen, FuentesDatos.PCCOMPONENTES,datos);
+                    Movil movil = new Movil(nombre, precio_util, urlMovil, urlImagen);
                     listaMoviles.add(movil);
                     
                 }catch (Exception e) {
@@ -222,11 +123,7 @@ public class Scraping {
         
         // extraer cada teléfono móvil (la información que nos hace falta) 
         Elements moviles = doc.getElementsByClass("product-container");
-        
-        System.out.println("ADIOS y el tamaño es: " +  moviles.size());
-        System.out.println("url: " +  url);
-        
-        
+               
         // sacar info de cada móvil
         for( int i=0; i < moviles.size(); i++ ){
             
@@ -240,8 +137,6 @@ public class Scraping {
             // ---------------------------------------
             String precio_actual = null;    // VARIABLE para guardar la cadena "virgen" con el precio, no será definitiva 
             
-            
-         
             try 
             {
                 nombre = moviles.get(i).getElementsByClass("product-name").text();
@@ -253,22 +148,16 @@ public class Scraping {
                 precio_actual = precio_actual.substring(0,precio_actual.indexOf("€"));
                 precio_util = Float.parseFloat(precio_actual);
                 
-                            
-
                 // sacar la URL
                 urlMovil = moviles.get(i).getElementsByClass("product-name").attr("href");
                 
-
-                // sacar enlace imagen
                 // sacar enlace imagen
                 Elements tagImage = moviles.get(i).getElementsByTag("img");   // paso previo a sacar la imagen
                 urlImagen = tagImage.attr("data-original");
                 //Creación del objeto móvil.
                
-                //Document doc2 = (Document) Jsoup.connect(urlMovil).get(); 
-                //String datos = doc2.getElementById("ficha-producto-caracteristicas").html();   // 
-                String datos = "";
-                Movil movil = new Movil(nombre, precio_util, urlMovil, urlImagen, FuentesDatos.PCCOMPONENTES,datos);
+
+                Movil movil = new Movil(nombre, precio_util, urlMovil, urlImagen);
                 listaMoviles.add(movil);
                     
             }catch (Exception e) {
@@ -284,6 +173,7 @@ public class Scraping {
     public ArrayList<Movil> getListaMoviles(){
     	return listaMoviles;
     }
+    
     private float limpiarYConvertirPrecio(String p)
     {
         // quitar la subcadena " €" 
@@ -298,42 +188,7 @@ public class Scraping {
         return a_devolver; 
     }
     
-//    private static float limpiarYConvertirPrecio2(String p)
-//    {
-//        // quitar la subcadena " €" 
-//        String aux = p.substring(0, p.length()-2);
-//
-//        // cambiar ',' por '.' para uso correcto
-//        aux = aux.replace(",", ".") ;   
-//
-//        // convertir a float 
-//        float a_devolver =   Float.parseFloat(aux);
-//
-//        return a_devolver; 
-//    }
-//	
-	/**
-	 * Con esta método compruebo el Status code de la respuesta que recibo al hacer la petición
-	 * EJM:
-	 * 		200 OK			300 Multiple Choices
-	 * 		301 Moved Permanently	305 Use Proxy
-	 * 		400 Bad Request		403 Forbidden
-	 * 		404 Not Found		500 Internal Server Error
-	 * 		502 Bad Gateway		503 Service Unavailable
-	 * @param url
-	 * @return Status Code
-	 */
-	public static int getStatusConnectionCode(String url) {
-			
-	    Response response = null;
-		
-	    try {
-		response = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(100000).ignoreHttpErrors(true).execute();
-	    } catch (IOException ex) {
-		System.out.println("Excepción al obtener el Status Code: " + ex.getMessage());
-	    }
-	    return response.statusCode();
-	}
+
 	
 	/**
 	 * Con este método devuelvo un objeto de la clase Document con el contenido del
@@ -352,12 +207,6 @@ public class Scraping {
 	    return documento;
 	}
 	
-//	public static void main(String[] args) {
-//		String url = "https://www.maxmovil.com/es/moviles-libres/comprar-smartphones-libres.html#/dffullscreen/query=" + reemplazaEspaciosPhoneHouse("Xiaomi note 8") 
-//		  + "&filter%5Bcategories%5D%5B0%5D=Smartphone&query_name=match_and";
-//		
-//		Document doc = getHtmlDocument(url);
-//	}
-	
+
 }
 

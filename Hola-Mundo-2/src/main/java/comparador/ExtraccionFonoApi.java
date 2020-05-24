@@ -40,14 +40,12 @@ public class ExtraccionFonoApi {
                 
                 // sacar características
                 caracteristicas = sacarCaracteristicasFonoapi(listaSacada.get(i));
-
-                System.out.println("Nombre = " + nombre + "\tCaracterísticas: " + caracteristicas);
                 
                 
                 
             }
         }catch(Exception e){  
-            System.out.println("NO SE HA ENCONTRADO NADA: " + e.getMessage());
+            System.err.println("NO SE HA ENCONTRADO NADA : " + e.getMessage());
             
         }; 
        

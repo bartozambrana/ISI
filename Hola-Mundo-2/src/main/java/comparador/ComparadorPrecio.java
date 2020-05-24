@@ -38,7 +38,7 @@ public class ComparadorPrecio {
 	}
 	
 	public ComparadorPrecio(String marca, String modelo) {
-		producto = marca + " " + modelo;
+		producto = marca.trim() + " " + modelo.trim();
 		scraping = new Scraping(producto);
 		api.setMarca(marca);
 		api.setModelo(modelo);
@@ -109,7 +109,7 @@ public class ComparadorPrecio {
 			String link = aList3.get(5).toString();
 			String imagen = aList3.get(7).toString();
 
-			Movil movil = new Movil(marca,Float.parseFloat(precio),link,imagen,FuentesDatos.PCCOMPONENTES,"");
+			Movil movil = new Movil(marca,Float.parseFloat(precio),link,imagen);
 			listaMoviles.add(movil);	
 		}
 	}
